@@ -372,7 +372,7 @@ void ps()
 				cout << time;
 		}
     //To check whether a new task can be added to the list
-		while (availMem <= overallMemory)
+		while (availMem >=0)
 		{
 			ifTaskAlloc = 0;
 
