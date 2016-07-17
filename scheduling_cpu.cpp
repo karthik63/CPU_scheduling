@@ -72,9 +72,10 @@ void sjf()
 	availMem = overallMemory;
 	it = p.begin();
 
-	set<task, taskCompare> toEx; set<task, taskCompare>::iterator curr, its; task currCopy; int ifCPUidle = 0; int flag = 0; int prevPid = -1, ifTaskCompl = 0;
-	int prevPrinted, totalTA = 0, ifTaskCl = 0, ifTaskAlloc = 0, stFlag = 0, index = 0, totalWait = 0, tasksCompl = 0, i = 0; list<task> activeProc; list<task>::iterator itl;
-	set<int>currEx; map<int, int>  prevEx; map<int, int>::iterator itm; set<int>::iterator setit; int flag2 = 0, flag3 = 0;
+	set<task, taskCompare> toEx; set<task, taskCompare>::iterator curr, its; task currCopy; 
+	int flag = 0, totalTA = 0, ifTaskAlloc = 0, totalWait = 0, tasksCompl = 0, i = 0, flag2 = 0, flag3 = 0;
+	list<task> activeProc; list<task>::iterator itl;
+	set<int>currEx; map<int, int>  prevEx; map<int, int>::iterator itm; set<int>::iterator setit;
 
 	while (1)
 	{
@@ -113,6 +114,7 @@ void sjf()
 				ifPrevEnd = 1;
 				cout << 'p' << itl->pid << ',';
 				totalTA += i - itl->at;
+				totalWait+=
 				availMem += itl->mem;
 				itm = prevEx.find(curr->pid);
 				if (itm != prevEx.end())
@@ -372,7 +374,7 @@ void ps()
 				cout << time;
 		}
     //To check whether a new task can be added to the list
-		while (availMem >=0)
+		while (availMem >0)
 		{
 			ifTaskAlloc = 0;
 
