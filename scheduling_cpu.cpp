@@ -226,7 +226,6 @@ void sjf()
 	cout << "\nAverage Turnaround time is " << (float)totalTA / (float)n << "sec(s)\n";
 	cout << "Average Waiting time is " << (float)totalWait / (float)n << "sec(s)\n";
 
-	int k = 0; k++;
 
 }
 
