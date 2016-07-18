@@ -60,7 +60,7 @@ void sjf()
 	float availMem, overallMemory; int n;
 	cout << "Enter number of processes ";
 	cin >> n;
-	vector<task> p(n); vector<task>::iterator it;
+	vector<task> p(n); vector<task>::iterator it; vector<int> btOrig(n + 1, 0);
 	for (int i = 0; i < n; i++)
 	{
 		cout << "arrival time";
@@ -70,9 +70,10 @@ void sjf()
 		cout << "memory:";
 		cin >> p[i].mem;
 		p[i].pid = i + 1;
+		btOrig[i+1] = p[i].bt;
 	}
 
-	cout << "Enter available memory"; cin >> overallMemory;
+	cout << "Enter available memory\n"; cin >> overallMemory;
 
 	sort(p.begin(), p.end(), sjfSort); it = p.begin();
 
@@ -125,7 +126,7 @@ void sjf()
 				ifPrevEnd = 1;
 				cout << 'p' << itl->pid << ',';
 				totalTA += i - itl->at;
-				totalWait += i - itl->at - itl->bt;
+				totalWait += i - itl->at - btOrig[itl->pid];
 				availMem += itl->mem;
 				itm = prevEx.find(curr->pid);
 				if (itm != prevEx.end())
@@ -134,7 +135,6 @@ void sjf()
 				toEx.erase(curr);
 				itl = activeProc.erase(itl);
 				tasksCompl++;
-				totalTA += i;
 			}
 
 			else
@@ -155,6 +155,8 @@ void sjf()
 
 		its = toEx.begin();
 
+		availMem = overallMemory;
+
 		while (availMem >= 0)
 		{
 			ifTaskAlloc = 0;
@@ -166,8 +168,6 @@ void sjf()
 			{
 				ifTaskAlloc = 1;
 				availMem -= its->mem;
-
-				totalWait += i;
 
 				itm = prevEx.find(its->pid);
 
@@ -223,10 +223,9 @@ void sjf()
 			break;
 	}
 
-	cout << "\nAverage Turnaround time is " << (float)totalTA / (float)n << "sec(s)\n";
-	cout << "Average Waiting time is " << (float)totalWait / (float)n << "sec(s)\n";
-
-
+	cout << "\nAverage Turnaround time is " << (float)totalTA / (float)n << " sec(s)\n";
+	cout << "Average Waiting time is " << (float)totalWait / (float)n << " sec(s)\n";
+	
 }
 
 void fcfs()
@@ -278,8 +277,10 @@ void fcfs()
 					if (mem == 0) {
 						if (a[i].at != 0)
 							cout << " -> " << t << ",P" << a[i].pid + 1;
-						else if (i != 0)
+						else if (i != 0 && a[i].at > t)
 							cout << t;
+						else if(i != 0)
+							cout << " -> " << t << ",P" << a[i].pid + 1;
 					}
 					mem += a[i].mem;
 					if (mem - a[i].mem != 0)
@@ -319,8 +320,7 @@ void fcfs()
 //Function for priority sort
 void ps()
 {
-	float overallMemory, n, currTime = 0, totalWait = 0, totalTA = 0;
-	int a;
+	float overallMemory; int n, currTime = 0, totalWait = 0, totalTA = 0;
 	cout << "Enter number of processes ";
 	cin >> n;
 	vector<task> p(n); vector<task>::iterator itv;
@@ -377,17 +377,17 @@ void ps()
 			}
 
 			else
-				itl++;
-
-			if (ifTaskCl == 1)
-				cout << time;
+				itl++;			
 		}
+
+		if (ifTaskCl == 1)
+			cout << time;
 		//To check whether a new task can be added to the list
+
+		stFlag = 0;
 		while (availMem >0)
 		{
 			ifTaskAlloc = 0;
-
-			stFlag = 0;
 
 			if (index >= n)
 				break;
@@ -447,7 +447,7 @@ int main()
 		case 1:
 			fcfs(); break;
 		case 2:
-			//sjf(); break;
+			sjf(); break;
 		case 3:
 			ps(); break;
 		case 0:
