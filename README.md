@@ -1,4 +1,4 @@
-###Spider Algos Project
+##Spider Algos Project
 
 This project is for scheduling of the processes. It also takes care of processing multiple operations at the same time.<br />
 The task scheduling is done by three processes:
@@ -9,7 +9,7 @@ The task scheduling is done by three processes:
 
 The user is required to select which type of scheduling he wants.
 
-#####Documentation for single-process cpu task scheduling
+##Documentation for single-process cpu task scheduling
 
 ####User documentation for FCFS:
 
@@ -58,7 +58,7 @@ The user is required to select which type of scheduling he wants.
   - If the given process is paused and a new process begins, the representation is similar to that of a new process starting. Eg(0->p1->20->p3->22->p1)
 
 
-#####Documentation for multi-process cpu task scheduling
+##Documentation for multi-process cpu task scheduling
 
 ####User documentation for FCFS:
 
