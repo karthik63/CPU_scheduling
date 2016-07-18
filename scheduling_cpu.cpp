@@ -34,11 +34,11 @@ bool sjfSort(task a, task b)
 //function to sort array of tasks based on arrival time
 bool fcfsSort(task a, task b)
 {
-	if(a.at==b.at)
-	return a.pid<b.pid;
-	
+	if (a.at == b.at)
+		return a.pid<b.pid;
+
 	else
-	return a.at<b.at;
+		return a.at<b.at;
 }
 
 //To compare the processes according to burst time and memory
@@ -74,11 +74,11 @@ void sjf()
 
 	cout << "Enter available memory"; cin >> overallMemory;
 
-	sort(p.begin(), p.end(), sjfSort); it=p.begin();
+	sort(p.begin(), p.end(), sjfSort); it = p.begin();
 
 	availMem = overallMemory;
-	
-	set<task, taskCompare> toEx; set<task, taskCompare>::iterator curr, its; task currCopy; 
+
+	set<task, taskCompare> toEx; set<task, taskCompare>::iterator curr, its; task currCopy;
 	int flag = 0, totalTA = 0, ifTaskAlloc = 0, totalWait = 0, tasksCompl = 0, i = 0, flag2 = 0, flag3 = 0;
 	list<task> activeProc; list<task>::iterator itl;
 	//the bst currEx is based on the burst times of tasks that have arrived
@@ -96,7 +96,7 @@ void sjf()
 			cout << "0";
 			flag = 1;
 		}
-		
+
 		//vector of tasks has been sorted based on arrival time. So it can pick up from where the loop broke
 		// in a previous iteration.
 		while (it->at == i)
@@ -111,11 +111,9 @@ void sjf()
 				break;
 		}
 
-		ifTaskCl = 0;
-		
 		//activeProc is a std::list to make deletions easier
 		itl = activeProc.begin();
-		
+
 		while (itl != activeProc.end())
 		{
 			curr = toEx.find(*itl);
@@ -127,7 +125,7 @@ void sjf()
 				ifPrevEnd = 1;
 				cout << 'p' << itl->pid << ',';
 				totalTA += i - itl->at;
-				totalWait+= i - itl->at - itl->bt;
+				totalWait += i - itl->at - itl->bt;
 				availMem += itl->mem;
 				itm = prevEx.find(curr->pid);
 				if (itm != prevEx.end())
@@ -191,7 +189,7 @@ void sjf()
 			if (ifTaskAlloc == 0)
 				break;
 		}
-		
+
 		//print the processes that have been paused
 		for (itm = prevEx.begin(); itm != prevEx.end(); itm++)
 		{
@@ -203,10 +201,10 @@ void sjf()
 				flag2 = 1;
 			}
 		}
-	
+
 		if (flag2 == 1)
 			cout << i;
-		
+
 		//print the processes that are starting
 		for (setit = currEx.begin(); setit != currEx.end(); setit++)
 		{
@@ -228,12 +226,14 @@ void sjf()
 	cout << "\nAverage Turnaround time is " << (float)totalTA / (float)n << "sec(s)\n";
 	cout << "Average Waiting time is " << (float)totalWait / (float)n << "sec(s)\n";
 
+	int k = 0; k++;
+
 }
 
 void fcfs()
 {
-	int n,overall;
-	float turnaroundTime = 0, waitTime = 0,burstTotal = 0;
+	int n, overall;
+	float turnaroundTime = 0, waitTime = 0, burstTotal = 0;
 	cout << "\nEnter the number of process:";
 	cin >> n;
 	vector<int>list;
@@ -262,10 +262,10 @@ void fcfs()
 			++k;
 		}
 	}
-	if(a[0].at != 0)
-		cout<<0;
+	if (a[0].at != 0)
+		cout << 0;
 	else
-		cout<<0<<",P"<<a[0].pid+1;
+		cout << 0 << ",P" << a[0].pid + 1;
 	//k shows the no of processes that are over
 	while (k<n) {
 		//i is the no of processes that have been pushed inside memory ie it is
@@ -276,15 +276,15 @@ void fcfs()
 					++i;
 				}
 				else if (a[i].mem + mem <= overall) {
-					if(mem == 0){
-						if(a[i].at != 0)
-							cout<<" -> "<<t<<",P"<<a[i].pid + 1;
-					else if(i!=0)
-						cout<<t;
+					if (mem == 0) {
+						if (a[i].at != 0)
+							cout << " -> " << t << ",P" << a[i].pid + 1;
+						else if (i != 0)
+							cout << t;
 					}
 					mem += a[i].mem;
-					if(mem - a[i].mem != 0)
-						cout<<" -> "<<t<<",P"<<a[i].pid + 1;
+					if (mem - a[i].mem != 0)
+						cout << " -> " << t << ",P" << a[i].pid + 1;
 					Set.insert(i);
 					++i;
 				}
@@ -300,21 +300,21 @@ void fcfs()
 				mem -= a[*it].mem;
 				k++;
 				//k is no of operations that are outputed
-				cout <<" -> P"<<a[*it].pid + 1<<","<<t+1;
+				cout << " -> P" << a[*it].pid + 1 << "," << t + 1;
 				set<int>::iterator temp = it;
 				++temp;
-				turnaroundTime += t+1 - a[*it].at;
+				turnaroundTime += t + 1 - a[*it].at;
 				Set.erase(it);
 				it = temp;
 			}
-		else
-			++it;
+			else
+				++it;
 		}
 		t++;
 	}
 	waitTime = turnaroundTime - burstTotal;
-	cout<<"\nAverage turnaround time is: "<<turnaroundTime/n;
-	cout<<"\nAverage wait time is: "<<waitTime/n<<"\n";
+	cout << "\nAverage turnaround time is: " << turnaroundTime / n;
+	cout << "\nAverage wait time is: " << waitTime / n << "\n";
 }
 
 //Function for priority sort
@@ -343,7 +343,7 @@ void ps()
 	int flag = 0, availMem = overallMemory;
 
 	int time = 0, listIndex = 0, tasksCompl = 0, ifTaskAlloc = 0, index = 0,
-	stFlag = 0, ifTaskCl = 0;
+		stFlag = 0, ifTaskCl = 0;
 	list<task> activeProc; list<task>::iterator itl;
 
 	while (1)
@@ -362,7 +362,7 @@ void ps()
 		{
 			itl->bt--;
 
-      //When a process is completed, memory is freed and the process is removed
+			//When a process is completed, memory is freed and the process is removed
 			//from the list
 			if (itl->bt == 0)
 			{
@@ -383,7 +383,7 @@ void ps()
 			if (ifTaskCl == 1)
 				cout << time;
 		}
-    //To check whether a new task can be added to the list
+		//To check whether a new task can be added to the list
 		while (availMem >0)
 		{
 			ifTaskAlloc = 0;
@@ -393,7 +393,7 @@ void ps()
 			if (index >= n)
 				break;
 
-      //If the memory required for the process is more than total memory available
+			//If the memory required for the process is more than total memory available
 			//skip the process
 			if (p[index].mem > overallMemory)
 			{
@@ -410,10 +410,10 @@ void ps()
 				activeProc.push_back(p[index]);
 				totalWait += time;
 
-				if (stFlag == 0&&time!=0)
+				if (stFlag == 0 && time != 0)
 					cout << "->" << time;
 
-					cout << ",p" << p[index].pid;
+				cout << ",p" << p[index].pid;
 				index++;
 				stFlag = 1;
 			}
