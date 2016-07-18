@@ -28,7 +28,7 @@ The user is required to select which type of scheduling he wants.
 
 ####User documentation for Priority Scheduling:
 
-+ Priority scheduling is a method of scheduling processes based on priority. In this method, the scheduler chooses the tasks to work as per the priority.
++ Priority scheduling is a method of scheduling processes based on priority. In this method, the scheduler chooses the tasks to work as per the priority. All the tasks are assumed to have arrived at the beginning of the scheduling.
 
 + The user is required to provide the following input:
   - The no of operations that are to be performed.
@@ -77,7 +77,7 @@ The user is required to select which type of scheduling he wants.
 
 ####User documentation for Priority Scheduling:
 
-+ Priority scheduling is a method of scheduling processes based on priority. In this method, the scheduler chooses the tasks to work as per the priority.
++ Priority scheduling is a method of scheduling processes based on priority. In this method, the scheduler chooses the tasks to work as per the priority. All the tasks are assumed to have arrived at the beginning of the scheduling.
 
 + The user is required to provide the following input:
   - The no of operations that are to be performed.
