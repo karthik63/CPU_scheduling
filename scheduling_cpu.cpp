@@ -2,7 +2,9 @@
 #include <algorithm>
 #include <vector>
 #include <set>
-#include<list>
+#include <list>
+#include <map>
+#include <iterator>
 using namespace std;
 //pid is the process id, bt is the burst time, at is the arrival time, prio is
 //the priority(if required) and mem is the memory required for this process
