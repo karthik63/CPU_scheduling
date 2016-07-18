@@ -104,6 +104,9 @@ void sjf()
 		{
 			if (it->mem <= overallMemory)
 				toEx.insert(*it);
+				
+			else
+				tasksCompl++;
 
 			if (next(it, 1) != p.end())
 				it++;
