@@ -80,6 +80,7 @@ void sjf()
 	availMem = overallMemory;
 
 	set<task, taskCompare> toEx; set<task, taskCompare>::iterator curr, its; task currCopy;
+	//totalTA=totalTurnAround
 	int flag = 0, totalTA = 0, ifTaskAlloc = 0, totalWait = 0, tasksCompl = 0, i = 0, flag2 = 0, flag3 = 0;
 	list<task> activeProc; list<task>::iterator itl;
 	//the bst currEx is based on the burst times of tasks that have arrived
@@ -87,6 +88,8 @@ void sjf()
 	//the set currEx maintains the new processes starting at any instant and map prevEx is maintained
 	//to acertain which processes have been paused. the element.second=0 if process is paused
 	set<int>currEx; map<int, int>  prevEx; map<int, int>::iterator itm; set<int>::iterator setit;
+	
+	//again bsts used to minimise find times
 
 	while (1)
 	{
@@ -385,8 +388,8 @@ void ps()
 
 		if (ifTaskCl == 1)
 			cout << time;
+			
 		//To check whether a new task can be added to the list
-
 		stFlag = 0;
 		while (availMem >0)
 		{
@@ -426,6 +429,7 @@ void ps()
 
 		time++;
 
+		//Exit loop on completion of all the tasks
 		if (tasksCompl == n)
 			break;
 	}
